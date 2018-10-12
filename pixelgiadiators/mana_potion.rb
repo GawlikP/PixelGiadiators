@@ -1,13 +1,12 @@
-require "gosu";
-
-class Potion
-	attr_accessor :x,:y,:w,:h,:add_hp
-	def initialize x,y,add_hp
+require "gosu"
+class ManaPotion
+	attr_accessor :x,:y,:w,:h,:add_mana
+	def initialize x,y,add_mana
 		@x = x;
 		@y = y;
 		@w = 8.0;
 		@h = 8.0;
-		@add_hp = add_hp
+		@add_mana = add_mana;
 	end
 	def draw(scale,sprite)
 		sprite.draw(@x*scale,@y*scale,0,scale,scale);

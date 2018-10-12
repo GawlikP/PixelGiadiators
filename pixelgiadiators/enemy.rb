@@ -18,10 +18,6 @@ class Enemy
 		@attack_timer = 0.0;
 		@dmg = 0.1
 		@hp = 10.0;
-		@animation_frame = 5;
-		@actual_frame = 1;
-		@animation_time = 300.0;
-		@animation_timer = 0.0;
 	end
 	def update(delta,player)
 		
