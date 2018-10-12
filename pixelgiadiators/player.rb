@@ -3,7 +3,7 @@ require_relative "weapon";
 #require_relative "sprites";
 
 class Player 
-	attr_accessor :x, :y,:w,:h,:hp, :mp, :st, :money, :is_attacking
+	attr_accessor :x, :y,:w,:h,:hp, :mp, :st, :money, :is_attacking, :weapon
 	def initialize 
 		@x = 0.0
 		@y = 0.0
@@ -92,8 +92,8 @@ class Player
 	end
 	def attacking(ene)
 
-		if(@can_attack)
-		if(Gosu.button_down? Gosu::KB_SPACE)
+	if(@can_attack)
+	if(Gosu.button_down? Gosu::KB_SPACE)
 		cx = @x + @w/2;
   		cy = @y + @h/2;
   		closeX = cx;
@@ -185,10 +185,7 @@ class Player
 		end
 		else
 			idle.draw(x*scale,@y*scale,0,scale_x,scale); 
-		end
-		if @is_attacking 
-			yield;
-		end
+		end 		
 	end
 	def UI(font)
 		font.draw("Player hp:#{@hp}",0,0,0,1,1,0xff_ff0000);

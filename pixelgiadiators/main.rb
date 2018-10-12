@@ -7,6 +7,7 @@ require_relative "enemy"
 require_relative "ogre"
 require_relative "potion"
 require_relative "mana_potion"
+require_relative "animation"
 $SCREEN_W = 240;
 $SCREEN_H = 144;
 $SCALE = 4;
@@ -51,8 +52,12 @@ class Window < Gosu::Window
 		$ENEMIES.each do |x|
 			x.player_detection(@player);
 			x.update($DELTA,@player);
-			x.player_attacking(@player);
-			@player.attacking(x);
+			if x.player_attacking(@player) 
+				$ANIMATION.push(Animation.new(@player.x,@player.y,x.range,x.range,60,""));
+			end
+			if @player.attacking(x)
+				$ANIMATION.push(Animation.new(x.x,x.y,@player.weapon.range,@player.weapon.range,60,""));
+			end
 		end
 		$ITEMS.delete_if do |x|
 			if x.is_a?(GoldSack)
@@ -66,11 +71,11 @@ class Window < Gosu::Window
 			end
 		end
 		$ANIMATION.each do |x|
-			x.update(x)
+			x.update($DELTA)
 		end
 		$ANIMATION.delete_if do |x|
 			if(x.act_frame > x.frames)
-				@player.
+				true;
 			end
 		end
 	end
@@ -97,12 +102,10 @@ class Window < Gosu::Window
 
 
 		end
-		@player.draw($VIKING_IDLE,$VIKING_WALKING1,$VIKING_WALKING2,$VIKING_WALKING3,$VIKING_WALKING4,$SCALE)do
+		@player.draw($VIKING_IDLE,$VIKING_WALKING1,$VIKING_WALKING2,$VIKING_WALKING3,$VIKING_WALKING4,$SCALE)
+
 		$ANIMATION.each do |x|
-			if(x.where == "Player")
-				x.draw;
-			end
-		end
+			x.draw($SCALE,$ATTACK_ANIMATION1,$ATTACK_ANIMATION2,$ATTACK_ANIMATION3,$ATTACK_ANIMATION4,$ATTACK_ANIMATION5);
 		end
 
 	end

@@ -10,18 +10,17 @@ class Animation
 		@speed =speed;
 		@frames = 5;
 		@act_frame = 1;
-		@frame_timer 0.0;
+		@frame_timer = 0.0;
 		@where = where;
 	end
 	def update(dt)
 		@frame_timer += dt;
 		if(@frame_timer > @speed)
-			@act_frame++;
+			@act_frame+=1;
 			@frame_timer=0.0;
 		end
-		
 	end
-	def show(scale,frame1,frame2,frame3,frame4,frame5)
+	def draw(scale,frame1,frame2,frame3,frame4,frame5)
 		if(@act_frame == 1)
 			frame1.draw(@x*scale,@y*scale,0,scale,scale);
 		elsif @act_frame == 2
